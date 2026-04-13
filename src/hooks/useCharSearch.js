@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { getChoseong } from "es-hangul";
+import { disassemble, getChoseong } from "es-hangul";
 import { charInfo } from "../data/i18n/charInfo";
 import { useLanguage } from "../util/langUtils";
 
@@ -37,7 +37,7 @@ export const useCharSearch = (search, { showAllWhenEmpty = false } = {}) => {
         return searchData
             .filter(item =>
                 item.names.some(name => name.includes(term)) || // 어떤 언어든 포함되면 통과
-                item.choseong.includes(term) // 초성 검색
+                item.choseong.includes(disassemble(term)) // 초성 검색
             )
             .map(item => item.key);
     }, [search, searchData, showAllWhenEmpty]);
