@@ -65,7 +65,7 @@ const CharacterSearch = ({ setTarget }) => {
                         />
                     </div>
                     {open && (
-                        <div className="absolute z-10 bg-white text-[12px] flex shadow-lg shadow-gray-300 w-full pl-2 pr-4">
+                        <div className="absolute z-10 bg-white text-[12px] flex shadow-lg shadow-gray-300 w-full pl-2 pr-4 rounded-b-lg">
                             <div className={`flex w-[65%] pr-4 gap-y-1 max-h-[435.6px] ${searchList.length > 0 && 'flex-wrap content-start overflow-y-scroll'}`}>
                                 {searchList.length > 0 ? searchList.map(name => {
 
