@@ -65,7 +65,7 @@ const MyAccordion = ({ persKey, headerText, open, onOpenChange, items, server, t
                             return (
                                 <button
                                     key={'character_' + c}
-                                    className={`hover:bg-orange-200 cursor-pointer flex flex-col justify-center relative sm:p-2 p-1 md:w-[16.65%] xs:w-[25%] w-[33.3%] ${targetColor(c)} rounded-md`}
+                                    className={`hover:bg-orange-200 cursor-pointer flex flex-col justify-center relative sm:p-2 p-1 md:w-1/6 xs:w-1/4 w-1/3 ${targetColor(c)} rounded-md`}
                                     onClick={() => handleSetTarget(c)}>
 
                                     <div className="flex flex-col justify-center items-center">

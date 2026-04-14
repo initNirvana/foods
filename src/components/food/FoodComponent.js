@@ -242,8 +242,7 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
                                     {foodGrade[l].map((item, i) => (
                                         <button
                                             key={'foodItem_' + item}
-                                            className={`p-[2px] hover:bg-orange-200 cursor-pointer group relative ${targetColor(item)} rounded-md
-                                            lg:w-1/6 md:w-[20%] xxs:w-[33.3%] w-[50%]`}
+                                            className={`p-[2px] hover:bg-orange-200 cursor-pointer group relative ${targetColor(item)} rounded-md md:w-1/6 xs:w-1/4 w-1/3`}
                                             onClick={() => handleSetTarget(item)}>
                                             {/* 선택되지 않은 음식은 투명도 40% */}
                                             <div className="aspect-square p-2">
@@ -314,7 +313,7 @@ function foodListHeaderColor(l) {
                 : l === 2 ? 'bg-[rgb(114,216,133)]'
                     : l === 1 ? 'bg-[rgb(193,193,193)]'
                         : l === 0 ? 'bg-[rgb(230,230,230)]' : '';
-}   
+}
 
 function foodListHeaderShadow(l) {
 
