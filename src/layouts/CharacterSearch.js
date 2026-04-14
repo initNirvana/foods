@@ -29,19 +29,16 @@ const CharacterSearch = ({ setTarget }) => {
     // console.log(searchList.length, language)
 
     return (
-        <div className="opacity-95 fixed flex flex-col lg:flex-row items-center justify-center gap-4 py-2 lg:py-4 bg-white w-full z-40 shadow-[0_4px_0_0_rgba(230,230,230,0.4)]">
-            <div className="flex items-center gap-x-4">
+        <div className="opacity-95 fixed flex items-center justify-center gap-4 py-4 bg-white w-full z-40 shadow-[0_4px_0_0_rgba(230,230,230,0.4)]">
+            <div className="items-center gap-x-4 lg:inline hidden">
                 <span className="text-[24px] font-bold">
                     트릭컬 연회장 음식 호불호
                 </span>
-                <div className="inline lg:hidden">
-                    <ServerSelector />
-                </div>
             </div>
             <div className="flex items-center gap-x-1">
                 <div
                     ref={containerRef}
-                    className="relative sm:w-[380px] w-[300px]"
+                    className="relative xs:w-[380px] w-[240px]"
                     onBlur={(e) => {
                         if (!e.currentTarget.contains(e.relatedTarget)) {
                             setOpen(false);
@@ -61,12 +58,12 @@ const CharacterSearch = ({ setTarget }) => {
                                 setSearch(e.target.value);
                             }}
                             onFocus={() => setOpen(true)}
-                            className="text-[13px] focus:outline-none w-[340px]"
+                            className="text-[13px] focus:outline-none xs:w-[380px] w-[240px]"
                         />
                     </div>
                     {open && (
                         <div className="absolute z-10 bg-white text-[12px] flex shadow-lg shadow-gray-300 w-full pl-2 pr-4 rounded-b-lg">
-                            <div className={`flex w-[65%] pr-4 gap-y-1 max-h-[435.6px] ${searchList.length > 0 && 'flex-wrap content-start overflow-y-scroll'}`}>
+                            <div className={`flex xs:w-[65%] w-[60%] pr-4 gap-y-1 max-h-[435.6px] ${searchList.length > 0 && 'flex-wrap content-start overflow-y-scroll'}`}>
                                 {searchList.length > 0 ? searchList.map(name => {
 
                                     const charName = t(`char.${name}`)
@@ -104,13 +101,13 @@ const CharacterSearch = ({ setTarget }) => {
                                     </div>
                                 ) : (<></>)}
                             </div>
-                            <div className="w-[35%] gap-y-1 flex-col flex">
+                            <div className="xs:w-[35%] w-[40%] gap-y-1 flex-col flex">
                                 {getHistory().length > 0 && getHistory().map(recent => {
 
                                     const charName = t(`char.${recent}`)
 
                                     return (
-                                        <div
+                                        <button
                                             onMouseDown={() => {
                                                 setTarget(recent);
                                                 setOpen(false);
@@ -118,32 +115,31 @@ const CharacterSearch = ({ setTarget }) => {
                                                 addHistory(recent);
                                             }}
                                             key={'recent_character' + recent}
-                                            className="flex justify-between hover:bg-gray-100 cursor-pointer px-1 py-2 ml-2">
-                                            <div className="flex items-center gap-x-1 text-[14px]">
+                                            className="flex justify-between hover:bg-gray-100 cursor-pointer px-1 py-2 ml-2 min-w-0 w-full">
+                                            <div className="flex items-center gap-x-1 xs:text-[14px] text-[12px]">
                                                 <img
                                                     src={`${process.env.PUBLIC_URL}/images/character/profile/${recent}.webp`}
                                                     className="h-[24px] w-auto"
                                                     alt={charName}
                                                     title={charName} />
-                                                <div className="truncate font-bold">
+                                                <span className="truncate font-bold">
                                                     {charName}
-                                                </div>
+                                                </span>
                                             </div>
                                             {/* X 버튼 */}
                                             {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-gray-600">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg> */}
-                                        </div>
+                                        </button>
                                     )
                                 })}
                             </div>
                         </div>
                     )}
                 </div>
+
                 <LangSelector />
-                <div className="hidden lg:inline">
-                    <ServerSelector />
-                </div>
+                <ServerSelector />
             </div>
         </div>
     );
