@@ -63,7 +63,7 @@ const MyAccordion = ({ persKey, headerText, open, onOpenChange, items, server, t
                             // console.log(persGroup)
 
                             return (
-                                <div
+                                <button
                                     key={'character_' + c}
                                     className={`hover:bg-orange-200 cursor-pointer flex flex-col justify-center relative sm:p-2 p-1 md:w-[16.65%] xs:w-[25%] w-[33.3%] ${targetColor(c)} rounded-md`}
                                     onClick={() => handleSetTarget(c)}>
@@ -97,7 +97,7 @@ const MyAccordion = ({ persKey, headerText, open, onOpenChange, items, server, t
                                             </span>
                                         </span>
                                     </div>
-                                </div>
+                                </button>
 
                             )
                         })}

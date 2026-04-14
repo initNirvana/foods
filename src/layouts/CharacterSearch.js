@@ -29,7 +29,7 @@ const CharacterSearch = ({ setTarget }) => {
     // console.log(searchList.length, language)
 
     return (
-        <div className="opacity-95 fixed flex items-center justify-center gap-4 py-4 bg-white w-full z-40 shadow-[0_4px_0_0_rgba(230,230,230,0.4)]">
+        <header className="opacity-95 fixed flex items-center justify-center gap-4 py-4 bg-white w-full z-40 shadow-[0_4px_0_0_rgba(230,230,230,0.4)]">
             <div className="items-center gap-x-4 lg:inline hidden">
                 <span className="text-[24px] font-bold">
                     트릭컬 연회장 음식 호불호
@@ -141,7 +141,7 @@ const CharacterSearch = ({ setTarget }) => {
                 <LangSelector />
                 <ServerSelector />
             </div>
-        </div>
+        </header>
     );
 }
 

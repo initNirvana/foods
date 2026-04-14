@@ -240,7 +240,7 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
                                 {/* 음식 목록칸 */}
                                 <div className="flex flex-wrap text-[10px]">
                                     {foodGrade[l].map((item, i) => (
-                                        <div
+                                        <button
                                             key={'foodItem_' + item}
                                             className={`p-[2px] hover:bg-orange-200 cursor-pointer group relative ${targetColor(item)} rounded-md
                                             lg:w-1/6 md:w-[20%] xxs:w-[33.3%] w-[50%]`}
@@ -261,7 +261,7 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
                                                     alt={item}
                                                     title={item} />
                                             )}
-                                        </div>
+                                        </button>
                                     ))}
                                 </div>
                             </div>
