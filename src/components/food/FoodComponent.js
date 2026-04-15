@@ -7,12 +7,10 @@ import { useLanguage } from "../../util/langUtils";
 
 const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike, hate, setHate, soso, setSoso }) => {
 
-    const { foodGradeList, foodGrade, foodBonus, language, server, personality } = useLanguage();
-    const { t } = useTranslation();
+    const { foodGradeList, foodGrade, foodBonus, server, personality } = useLanguage();
+    const { t, i18n } = useTranslation();
+    const language = i18n.language;
     const [accoState, setAccoState] = useState(() => getAccoState())
-    // const [excludeOpen, setExcludeOpen] = useState(false);
-
-    // console.log(language)
 
     const handleAccoState = (pers, isOpen) => {
         setAccoState(prev => ({
@@ -131,7 +129,7 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
                         : target === item ? 'bg-orange-300' : '';
     }, [verylike, like, hate, soso, target])
 
-    const isTargetAndLike = (item) => {
+    const isTargetAndLike = useCallback((item) => {
 
         return (verylike?.includes(item) ||
             like?.includes(item) ||
@@ -139,7 +137,7 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
             hate?.includes(item)) ||
             target === item ||
             target === '';
-    }
+    }, [verylike, like, hate, soso, target])
 
     const howMuchLike = useCallback((item) => {
 
@@ -152,117 +150,28 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
     return (
         <div className="">
             <div>
-                {/* <div className="flex justify-center mb-2">
-                    <span className="font-bold text-[24px]">
-                        {target}
-                    </span>
-                </div> */}
                 <div className="flex justify-between">
                     {/* 음식칸 */}
                     <div className="relative md:mr-8 mr-2 max-w-[47%]">
-                        {foodGradeList.map((l, i) => (
-                            <div key={'foodList_' + i} className="bg-white mb-1">
-                                {/* 상단 색상칸 */}
-                                <div className={`h-8 py-1 mb-1 ${foodListHeaderColor(l)} ${foodListHeaderShadow(l)} rounded-md`}>
-                                    <div className="items-start md:flex md:flex-row hidden gap-x-3">
-                                        {l === 0 ? (
-                                            language === 'ko' ? (
-                                                <div className="pl-2">
-                                                    <span className="md:text-[15px] text-[0px]">이벤트 음식은 대부분 좋아합니다.</span>
-                                                    <span className="md:text-[0px] text-[13px]">이벤트 음식</span>
-                                                </div>
-                                            ) : (<></>)
-                                        ) : (
-                                            <div
-                                                className="pl-2 flex md:text-[14px] text-[11px] font-semibold whitespace-nowrap"
-                                                title="그럭저럭">
-                                                <img
-                                                    src={`${process.env.PUBLIC_URL}/images/icon/soso.webp`}
-                                                    className={`md:w-6 w-4 mr-1 flex items-center`}
-                                                    alt={'그럭저럭'}
-                                                    title={'그럭저럭'} />
-                                                <span className="flex items-center">
-                                                    {foodBonus[l]?.soso}
-                                                </span>
-                                            </div>
-                                        )}
-
-                                        {l !== 0 && target && charInfo[target]?.food && (
-                                            <>
-                                                {/* verylike 음식이 이 등급에 있는지 확인하고 표시 */}
-                                                {foodGrade[l].some(item => verylike?.includes(item)) && (
-                                                    <div
-                                                        className="pl-2 flex items-center md:text-[14px] text-[11px] font-semibold whitespace-nowrap"
-                                                        title="매우좋아함">
-                                                        <img
-                                                            src={`${process.env.PUBLIC_URL}/images/icon/verylike.webp`}
-                                                            className={`md:w-6 w-4 mr-1`}
-                                                            alt={'매우좋아함'}
-                                                            title={'매우좋아함'} />
-                                                        <span>
-                                                            {foodBonus[l]?.verylike}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                {foodGrade[l].some(item => like?.includes(item)) && (
-                                                    <div
-                                                        className="pl-2 flex items-center md:text-[14px] text-[11px] font-semibold whitespace-nowrap"
-                                                        title="좋아함">
-                                                        <img
-                                                            src={`${process.env.PUBLIC_URL}/images/icon/like.webp`}
-                                                            className={`md:w-6 w-4 mr-1`}
-                                                            alt={'좋아함'}
-                                                            title={'좋아함'} />
-                                                        <span>
-                                                            {foodBonus[l]?.like}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                {foodGrade[l].some(item => hate?.includes(item)) && (
-                                                    <div
-                                                        className="pl-2 flex items-center md:text-[14px] text-[11px] font-semibold whitespace-nowrap"
-                                                        title="싫어함">
-                                                        <img
-                                                            src={`${process.env.PUBLIC_URL}/images/icon/hate.webp`}
-                                                            className={`md:w-6 w-4 mr-1`}
-                                                            alt={'싫어함'}
-                                                            title={'싫어함'} />
-                                                        <span>
-                                                            {foodBonus[l]?.hate}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                            </>
-                                        )}
-                                    </div>
-
-                                </div>
-                                {/* 음식 목록칸 */}
-                                <div className="flex flex-wrap text-[10px]">
-                                    {foodGrade[l].map((item, i) => (
-                                        <button
-                                            key={'foodItem_' + item}
-                                            className={`p-[2px] hover:bg-orange-200 cursor-pointer group relative ${targetColor(item)} rounded-md md:w-1/6 xs:w-1/4 w-1/3`}
-                                            onClick={() => handleSetTarget(item)}>
-                                            {/* 선택되지 않은 음식은 투명도 40% */}
-                                            <div className="aspect-square p-2">
-                                                <img
-                                                    src={`${process.env.PUBLIC_URL}/images/food/${item}.webp`}
-                                                    className={`w-full h-full object-contain
-                                                    ${isTargetAndLike(item) || 'opacity-60'}`}
-                                                    alt={item}
-                                                    title={item} />
-                                            </div>
-                                            {howMuchLike(item) && (
-                                                <img
-                                                    src={`${process.env.PUBLIC_URL}/images/icon/${howMuchLike(item)}.webp`}
-                                                    className={`w-5 z-10 absolute top-[-3px] right-[-4px] rotate-12`}
-                                                    alt={item}
-                                                    title={item} />
-                                            )}
-                                        </button>
-                                    ))}
-                                </div>
+                        {foodGradeList.map((l) => (
+                            <div key={'foodList_' + l} className="w-full">
+                                <MyAccordion
+                                    open={accoState[l] ?? true}
+                                    onOpenChange={(open) => handleAccoState(l, open)}
+                                    itemsKey={l}
+                                    items={foodGrade[l]}
+                                    targetColor={targetColor}
+                                    handleSetTarget={handleSetTarget}
+                                    howMuchLike={howMuchLike}
+                                    isTargetAndLike={isTargetAndLike}
+                                    type='food'
+                                    foodBonus={foodBonus}
+                                    language={language}
+                                    verylike={verylike}
+                                    like={like}
+                                    hate={hate}
+                                    target={target}
+                                />
                             </div>
                         ))}
                         {server !== 'kr' && (
@@ -274,55 +183,27 @@ const FoodComponent = ({ target, setTarget, verylike, setVerylike, like, setLike
                     {/* 사도칸 */}
                     <div className="relative min-w-[47%] max-w-[47%]">
                         {/* 성격 블럭 */}
-                        {personality.map((p, i) => (
+                        {personality.map((p) => (
                             <div key={'pers_' + p} className={`w-full`}>
                                 <MyAccordion
                                     open={accoState[p] ?? true}
                                     onOpenChange={(open) => handleAccoState(p, open)}
-                                    persKey={p}
+                                    itemsKey={p}
                                     headerText={t(`personality.${p}`)}
                                     items={persGroup[p]}
                                     targetColor={targetColor}
                                     handleSetTarget={handleSetTarget}
-                                    server={server}
                                     t={t}
                                     howMuchLike={howMuchLike}
+                                    type='character'
                                 />
-
                             </div>
                         ))}
-
-                        {/* <div className="absolute -top-12 right-0 sm:left-0 sm:mr-1 p-1">
-                            <button
-                                onClick={() => setExcludeOpen(p => !p)}>
-                                <ExcludeIcon />
-                            </button>
-                        </div> */}
                     </div>
                 </div>
             </div>
         </div >
     );
-}
-
-function foodListHeaderColor(l) {
-
-    return l === 5 ? 'bg-[rgb(244,232,163)]'
-        : l === 4 ? 'bg-[rgb(196,142,253)]'
-            : l === 3 ? 'bg-[rgb(109,175,246)]'
-                : l === 2 ? 'bg-[rgb(114,216,133)]'
-                    : l === 1 ? 'bg-[rgb(193,193,193)]'
-                        : l === 0 ? 'bg-[rgb(230,230,230)]' : '';
-}
-
-function foodListHeaderShadow(l) {
-
-    return l === 5 ? 'shadow-[4px_4px_0_0_rgba(244,232,163,0.2)]'
-        : l === 4 ? 'shadow-[4px_4px_0_0_rgba(196,142,253,0.2)]'
-            : l === 3 ? 'shadow-[4px_4px_0_0_rgba(109,175,246,0.2)]'
-                : l === 2 ? 'shadow-[4px_4px_0_0_rgba(114,216,133,0.2)]'
-                    : l === 1 ? 'shadow-[4px_4px_0_0_rgba(193,193,193,0.2)]'
-                        : l === 0 ? 'shadow-[4px_4px_0_0_rgba(230,230,230,0.2)]' : '';
 }
 
 export default FoodComponent;
