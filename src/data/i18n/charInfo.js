@@ -419,7 +419,7 @@ export const charInfo = {
         stats: { default: { grade: 3, type: "활발" } }
     },
     "셀리네": {
-        names: { ko: "셀리네", en: "Selline", 'zh-CN': "赛琳娜", 'zh-TW': "", ja: "" },
+        names: { ko: "셀리네", en: "Selline", 'zh-CN': "赛琳娜", 'zh-TW': "", ja: "セリーネ" },
         food: { verylike: ["악령 푸딩"], like: ["비밀의 포도주스", "유령 푸딩", "1급 비밀의 포도주스"], hate: ["마시멜로 마카롱", "레몬차", "저당 마시멜로 마카롱", "유기농 레몬차"] },
         stats: { default: { grade: 3, type: "활발" } }
     },
