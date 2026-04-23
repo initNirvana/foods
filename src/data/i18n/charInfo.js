@@ -242,6 +242,11 @@ export const charInfo = {
         food: { verylike: ["UFC 야채 튀김"], like: ["UFC 당근 튀김", "레몬차", "유기농 레몬차"], hate: ["따뜻한 아이스 아메리카노", "뜨거운 냉동 아메리카노", "보석 타르트", "보물 타르트"] },
         stats: { default: { grade: 3, type: "냉정" } }
     },
+    "아라그니아": {
+        names: { ko: "아라그니아", en: "Aragnia", 'zh-CN': "阿拉戈尼娅", 'zh-TW': "", ja: "" },
+        food: { verylike: ["석류석 화채"], like: ["석류석 열매", "미숫가루", "927곡 미숫가루"], hate: ["따뜻한 아이스 아메리카노", "뜨거운 냉동 아메리카노", "계피맛 알사탕", "계피맛 건강 알사탕"] },
+        stats: { default: { grade: 3, type: "냉정" } }
+    },
     "에스피": {
         names: { ko: "에스피", en: "Espi", 'zh-CN': "埃斯皮", 'zh-TW': "", ja: "エスピー" },
         food: { verylike: ["딥다크 초콜릿 아이스크림"], like: ["UFC 당근 튀김", "초콜릿 아이스크림", "UFC 야채 튀김"], hate: ["캬라멜 팝콘", "꿀단지", "엘플릭스 캬라멜 팝콘", "꿀꿀단지"] },
