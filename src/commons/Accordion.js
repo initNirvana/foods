@@ -152,7 +152,7 @@ const MyAccordion = ({
                     </Accordion.Trigger>
                 </Accordion.Header>
 
-                <Accordion.Content className="data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown overflow-hidden">
+                <Accordion.Content className="data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown">
                     <div className="flex flex-wrap justify-start w-full">
                         {/* 사도/음식 블럭 */}
                         {items.map((item) => {
